@@ -64,24 +64,36 @@ The project requires several Python packages and external libraries. Key depende
 - BSON Library
 - Other dependencies listed in `requirements.txt`
 
-## Setup and Installation
+## Workflow and Architecture
 
-1. Clone the repository:
-```bash
-git clone https://github.com/AnhQuanengineer/DATA-Synchronizing.git
-```
+### 1. Logic 1: Set up Databases with Docker  
+- Pull Docker images for **MySQL**, **MongoDB**, and **Redis**.  
+- Configure users and passwords.  
+- Create schemas for each database and validate them.  
 
-2. Set up the Python environment and install dependencies:
-```bash
-pip install -r requirements.txt
-```
+### 2. Logic 2: Insert Data into Databases using Spark  
+- Set up and configure **Apache Spark**.  
+- Write data into **MySQL**, **MongoDB**, and **Redis** simultaneously.  
+- Validate that Spark has written all data correctly without missing records.  
 
-3. Start the services using Docker Compose:
-```bash
-docker-compose up -d
-```
+### 3. Logic 3: Implement Change Data Capture (CDC) on MySQL with Kafka  
+- Set up **Kafka** and **Zookeeper**.  
+- Implement a **CDC mechanism** on MySQL using triggers to capture data changes (**Insert, Update, Delete**).  
+- Write captured changes in real-time to a Kafka topic.  
 
-4. Configure the databases:
+### 4. Logic 4: Stream and Validate Data with Spark  
+- Use **Spark Structured Streaming** to read change data from Kafka.  
+- Develop a Kafka Consumer with integrated validation to ensure:  
+  - Correct schema  
+  - Valid data format  
+  - Transmission integrity  
+
+### 5. Logic 5: Data Validation and Synchronization to MongoDB and Redis  
+- After passing validation, the Consumer acts as a Producer to forward the validated data to a new Kafka topic.  
+- **Spark Structured Streaming** consumes data from the validated topic, applies the required transformations, and writes the final changes (**Insert, Update, Delete**) to **MongoDB** and **Redis**.  
+
+
+## Configure the databases:
 - Execute SQL scripts in the `sql/` directory
 - Configure connection settings in `config/database_config.py`
 - Set up Spark configurations in `config/spark_config.py`

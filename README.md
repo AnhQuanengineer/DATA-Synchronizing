@@ -81,9 +81,9 @@ The project requires several Python packages and external libraries. Key depende
 - Implement a **CDC mechanism** on MySQL using triggers to capture data changes (**Insert, Update, Delete**).  
 - Write captured changes in real-time to a Kafka topic.  
 
-### 4. Logic 4: Stream and Validate Data with Spark  
+### 4. Logic 4: Stream and Validate Data with Spark, Kafka  
 - Use **Spark Structured Streaming** to read change data from Kafka.  
-- Develop a Kafka Consumer with integrated validation to ensure:  
+- Develop a Kafka Consumer(for transfer) and Spark(any time spark load to database) with integrated validation to ensure:  
   - Correct schema  
   - Valid data format  
   - Transmission integrity  

@@ -1,0 +1,21 @@
+# Env
+.env*
+
+# IDE
+.idea/
+
+# Docker
+tutorial_docker.txt
+docker-compose.yml
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Test
+test.py
+
+data/
+.vscode/

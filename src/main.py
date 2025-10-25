@@ -30,9 +30,9 @@ def main(config):
         validate_mysql_schema(cursor)
 
     # #REDIS
-    # with RedisConnect(config['redis'].host, config["redis"].port, config["redis"].user, config["redis"].password, config["redis"].database) as redis_client:
-    #     create_redis_schema(redis_client.connect())
-    #     validate_redis_schema(redis_client.connect())
+    with RedisConnect(config['redis'].host, config["redis"].port, config["redis"].user, config["redis"].password, config["redis"].database) as redis_client:
+        create_redis_schema(redis_client.connect())
+        validate_redis_schema(redis_client.connect())
 if __name__ == "__main__":
     config = get_database_config()
     main(config)

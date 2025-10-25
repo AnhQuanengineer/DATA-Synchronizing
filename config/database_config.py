@@ -73,4 +73,5 @@ def get_database_config() -> Dict[str,DatabaseConfig]:
 
 
 db_config = get_database_config()
+#read env to config
 # print(db_config)

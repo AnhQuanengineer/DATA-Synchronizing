@@ -81,4 +81,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+#cdc and validate kafka to mongo after trggier mysql
 

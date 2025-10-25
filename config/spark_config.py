@@ -94,6 +94,4 @@ if __name__ == "__main__":
     spark_config = get_spark_config()
     print(spark_config)
 
-#spark connect and config
-
 

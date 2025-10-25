@@ -36,3 +36,5 @@ def main(config):
 if __name__ == "__main__":
     config = get_database_config()
     main(config)
+
+#create and validate schema and data

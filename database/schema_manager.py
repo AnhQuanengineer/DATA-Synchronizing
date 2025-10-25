@@ -116,4 +116,4 @@ def validate_redis_schema(client):
 
     print("------------Validated schema in Redis-----------------")
 
-
+#create and validate schema and data

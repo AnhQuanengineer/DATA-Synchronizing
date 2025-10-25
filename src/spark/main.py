@@ -47,35 +47,37 @@ def main():
 
     df.show()
 
-    # df_write_table_users = df.withColumn("spark_temp", lit("spark_write")) \
-    #     .select(
-    #     col('actor.id').alias('user_id')
-    #     ,col('actor.login').alias('login')
-    #     ,col('actor.gravatar_id').alias('gravatar_id')
-    #     ,col('actor.avatar_url').alias('avatar_url')
-    #     ,col('actor.url').alias('url')
-    #     ,col("spark_temp")
-    # )
-    #
-    # # df_write_table_users.show()
-    #
-    # df_write_table_repositories = df.select(
-    #     col('repo.id').alias('repo_id')
-    #     ,col('repo.name').alias('name')
-    #     ,col('repo.url').alias('url')
-    # )
-    #
-    # spark_configs = get_spark_config()
-    # df_write = SparkWriteDatabases(spark_connect.spark, spark_configs)
-    # # df_write.spark_write_mysql(df=df_write_table_users,table_name= "Users",jdbc_url=db_config["mysql"].jdbc, config=db_config["mysql"],mode="append" )
-    # df_write.write_all_databases(df_write_table_users, "Users", "append")
-    # # df_write.write_all_databases(df_write_table_repositories, "Repositories", "append")
-    #
-    # df_validate = SparkWriteDatabases(spark_connect.spark, spark_configs)
-    # df_validate.validate_spark_mysql(df_write_table_users, "Users", spark_configs['mysql']["jdbc_url"], spark_configs['mysql']["config"], "append")
-    # df_validate.validate_spark_mongodb(df_write_table_users, spark_configs["mongodb"]["uri"], spark_configs["mongodb"]["database"], spark_configs["mongodb"]["collection"], "append")
+    df_write_table_users = df.withColumn("spark_temp", lit("spark_write")) \
+        .select(
+        col('actor.id').alias('user_id')
+        ,col('actor.login').alias('login')
+        ,col('actor.gravatar_id').alias('gravatar_id')
+        ,col('actor.avatar_url').alias('avatar_url')
+        ,col('actor.url').alias('url')
+        ,col("spark_temp")
+    )
+
+    # df_write_table_users.show()
+
+    df_write_table_repositories = df.select(
+        col('repo.id').alias('repo_id')
+        ,col('repo.name').alias('name')
+        ,col('repo.url').alias('url')
+    )
+
+    spark_configs = get_spark_config()
+    df_write = SparkWriteDatabases(spark_connect.spark, spark_configs)
+    # df_write.spark_write_mysql(df=df_write_table_users,table_name= "Users",jdbc_url=db_config["mysql"].jdbc, config=db_config["mysql"],mode="append" )
+    df_write.write_all_databases(df_write_table_users, "Users", "append")
+    # df_write.write_all_databases(df_write_table_repositories, "Repositories", "append")
+
+    df_validate = SparkWriteDatabases(spark_connect.spark, spark_configs)
+    df_validate.validate_spark_mysql(df_write_table_users, "Users", spark_configs['mysql']["jdbc_url"], spark_configs['mysql']["config"], "append")
+    df_validate.validate_spark_mongodb(df_write_table_users, spark_configs["mongodb"]["uri"], spark_configs["mongodb"]["database"], spark_configs["mongodb"]["collection"], "append")
 
     spark_connect.spark.stop()
+
+#input data and validate
 
 if __name__ == "__main__":
 
